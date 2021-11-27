@@ -1,0 +1,98 @@
+@extends('layouts.app')
+
+@section('title')
+    {{ __('Create Page') }}
+@endsection
+
+@section('header')
+
+@endsection
+
+@section('content')
+    <h1>This page that can create posts</h1>
+    <div class="w-full max-w-md mx-auto bg-white rounded-lg shadow-lg p-6">
+        <form action="{{ route('store') }}" method="post" class="space-y-4">
+            @csrf
+
+            <div>
+                <label for="name" @class([
+                    'text-sm font-medium block mb-2',
+                    'text-gray-900' => !$errors->has('name'),
+                    'text-red-600' => $errors->has('name'),
+                ])>{{ __('Title') }}</label>
+                <input type="text" name="name" id="name" @class([
+                    'bg-gray-50 border text-gray-900 sm:text-sm rounded-lg block w-full p-2.5',
+                    'border-gray-300 focus:ring-blue-500 focus:border-blue-500' => !$errors->has(
+                        'name',
+                    ),
+                    'border-red-600 focus:ring-red-500 focus:border-red-500' => $errors->has(
+                        'name',
+                    ),
+                ]) value="{{ old('name') }}" required
+                    autocomplete autofocus>
+
+                @error('name')
+                    <small class="text-red-600">{{ $message }}</small>
+                @enderror
+            </div>
+
+            <div>
+                <label for="description" @class([
+                    'text-sm font-medium block mb-2',
+                    'text-gray-900' => !$errors->has('description'),
+                    'text-red-600' => $errors->has('description'),
+                ])>{{ __('Content') }}</label>
+                <textarea name="description" id="description" @class([
+                    'bg-gray-50 border text-gray-900 sm:text-sm rounded-lg block w-full p-2.5',
+                    'border-gray-300 focus:ring-blue-500 focus:border-blue-500' => !$errors->has(
+                        'description',
+                    ),
+                    'border-red-600 focus:ring-red-500 focus:border-red-500' => $errors->has(
+                        'description',
+                    ),
+                ]) required
+                    autocomplete>{{ old('description') }}</textarea>
+
+                @error('description')
+                    <small class="text-red-600">{{ $message }}</small>
+                @enderror
+            </div>
+
+            <div class="flex justify-center mt-8">
+                <div class="max-w-2xl rounded-lg shadow-xl bg-gray-50">
+                    <div class="m-4">
+                        <label class="inline-block mb-2 text-gray-500">File Upload</label>
+                        <div class="flex items-center justify-center w-full">
+                            <label
+                                class="flex flex-col w-full h-32 border-4 border-blue-200 border-dashed hover:bg-gray-100 hover:border-gray-300">
+                                <div class="flex flex-col items-center justify-center pt-7">
+                                    <svg xmlns="http://www.w3.org/2000/svg"
+                                        class="w-8 h-8 text-gray-400 group-hover:text-gray-600" fill="none"
+                                        viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
+                                    </svg>
+                                    <p class="pt-1 text-sm tracking-wider text-gray-400 group-hover:text-gray-600">
+                                        Attach a file</p>
+                                </div>
+                                <input type="file" class="opacity-0" />
+                            </label>
+                        </div>
+                    </div>
+                    <div class="flex justify-center p-2">
+                        <button class="w-full px-4 py-2 text-white bg-blue-500 rounded shadow-xl">Upload</button>
+                    </div>
+                </div>
+            </div>
+
+            <br>
+            <div class="flex justify-end">
+                <button type="submit"
+                    class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">{{ __('Create Post') }}</button>
+            </div>
+        </form>
+    </div>
+
+
+
+@endsection

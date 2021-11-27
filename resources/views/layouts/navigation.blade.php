@@ -1,3 +1,5 @@
+{{-- 上方的工具列 --}}
+
 <nav x-data="{ open: false }" class="bg-white border-b border-gray-100">
     <!-- Primary Navigation Menu -->
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -13,12 +15,29 @@
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex sm:items-center">
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
-                        {{ __('Home') }}
+                        <li>
+                            <a href="{{ route('showHomePage') }}"
+                                class="text-sm hover:bg-gray-100 text-gray-700 block px-4 py-2">
+                                {{ __('Home') }}</a>
+                        </li>
 
+                        {{-- <x-nav-link :href="route('login')" :active="request()->routeIs('login')"> --}}
+                        <li>
+                            <a href="{{ route('showAboutPage') }}"
+                                class="text-sm hover:bg-gray-100 text-gray-700 block px-4 py-2">
+                                {{ __('About Me') }}</a>
+                        </li>
 
-                    </x-nav-link>
+                        <li>
+                            <a href="{{ route('create') }}"
+                                class="text-sm hover:bg-gray-100 text-gray-700 block px-4 py-2">
+                                {{ __('Create New Post') }}
+                            </a>
+                        </li>
 
-                    <x-dropdown align="left">
+                        {{-- </x-nav-link> --}}
+
+                        {{-- <x-dropdown align="left">
                         <x-slot name="trigger">
                             <button
                                 class="flex items-center text-sm font-medium text-gray-500 hover:text-gray-700 hover:border-gray-300 focus:outline-none focus:text-gray-700 focus:border-gray-300 transition duration-150 ease-in-out">
@@ -48,18 +67,19 @@
                             </x-dropdown-link>
 
                         </x-slot>
-                    </x-dropdown>
+                    </x-dropdown> --}}
 
 
-                    <x-nav-link :href="route('login')" :active="request()->routeIs('login')">
+                        {{-- <x-nav-link :href="route('login')" :active="request()->routeIs('login')">
                         {{ __('Log in') }}
 
 
-                    </x-nav-link>
+                        </x-nav-link>
                     <x-nav-link :href="route('register')" :active="request()->routeIs('register')">
                         {{ __('Register') }}
 
 
+                    </x-nav-link> --}}
                     </x-nav-link>
                 </div>
             </div>

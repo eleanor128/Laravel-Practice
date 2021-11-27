@@ -4,8 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-class HomeController extends Controller
+class AboutMeController extends Controller
 {
+
     /**
      * Create a new controller instance.
      *
@@ -21,8 +22,9 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function index()
+
+    public function showpage()
     {
-        return view('articles.list');
+        return view('articles.about_me_page');
     }
 }

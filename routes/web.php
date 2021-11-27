@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\AboutMeController;
+use App\Http\Controllers\ArticleController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 /*
@@ -21,8 +23,15 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');
 
-Route::get('homepage', function () {
-    return view('articles.list');
-});
+Route::get('homepage', [ArticleController::class, 'showpage'])->name('showHomePage'); //這個route的名字叫showHomePage
+Route::get('create', [ArticleController::class, 'create'])->name('create'); //這個route的名字叫create
+Route::post('store', [ArticleController::class, 'store'])->name('store'); //這個route的名字叫store
+
+Route::get('about_me', [AboutMeController::class, 'showpage'])->name('showAboutPage'); //這個route的名字叫showAboutPage
+
+
+
 
 require __DIR__ . '/auth.php';
+
+// Route::get('/{id}', [CourseController::class, 'show'])->name('show');
