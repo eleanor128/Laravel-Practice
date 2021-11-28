@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreArticleRequest;
+use App\Models\Article;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 
 class ArticleController extends Controller
@@ -22,9 +24,11 @@ class ArticleController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function showpage()
+    public function homepage()
     {
-        return view('articles.homepage');
+        $articles = Article::get();
+
+        return view('articles.homepage', compact('articles'));
     }
 
     public function create()
@@ -32,9 +36,20 @@ class ArticleController extends Controller
         return view('articles.create');
     }
 
-    public function store(StoreArticleRequest $request)
+    public function store(Request $request): RedirectResponse
     {
-        auth()->user()->article()->create($request->validated());
+        $validated = $request->validate([
+            'title' => ['required', 'string'],
+            'content' => ['required', 'string'],
+            /**'image' => ['image'],*/
+        ]);
+        Article::create($validated);
         return redirect()->route('showHomePage');
+    }
+
+    public function show(Article $article)
+    {
+
+        return view('articles.show_article');
     }
 }

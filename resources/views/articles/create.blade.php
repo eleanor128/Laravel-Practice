@@ -9,59 +9,63 @@
 @endsection
 
 @section('content')
-    <h1>This page that can create posts</h1>
-    <div class="w-full max-w-md mx-auto bg-white rounded-lg shadow-lg p-6">
+
+    <div class="w-full max-w-screen-md mx-auto bg-white rounded-lg shadow-lg p-3">
         <form action="{{ route('store') }}" method="post" class="space-y-4">
             @csrf
 
             <div>
-                <label for="name" @class([
+                <label for="title" @class([
                     'text-sm font-medium block mb-2',
-                    'text-gray-900' => !$errors->has('name'),
-                    'text-red-600' => $errors->has('name'),
-                ])>{{ __('Title') }}</label>
-                <input type="text" name="name" id="name" @class([
+                    'text-gray-900' => !$errors->has('title'),
+                    'text-red-600' => $errors->has('title'),
+                ])>
+                </label>
+                <input type="text" placeholder="Title" name="title" id="title" @class([
                     'bg-gray-50 border text-gray-900 sm:text-sm rounded-lg block w-full p-2.5',
                     'border-gray-300 focus:ring-blue-500 focus:border-blue-500' => !$errors->has(
-                        'name',
+                        'title',
                     ),
+                
                     'border-red-600 focus:ring-red-500 focus:border-red-500' => $errors->has(
-                        'name',
+                        'title',
                     ),
-                ]) value="{{ old('name') }}" required
-                    autocomplete autofocus>
+                ])
+                    value="{{ old('title') }}" required autocomplete autofocus>
 
-                @error('name')
+                @error('title')
                     <small class="text-red-600">{{ $message }}</small>
                 @enderror
             </div>
 
             <div>
-                <label for="description" @class([
+                <label for="content" @class([
                     'text-sm font-medium block mb-2',
-                    'text-gray-900' => !$errors->has('description'),
-                    'text-red-600' => $errors->has('description'),
-                ])>{{ __('Content') }}</label>
-                <textarea name="description" id="description" @class([
+                    'text-gray-900' => !$errors->has('content'),
+                    'text-red-600' => $errors->has('content'),
+                ])>
+                </label>
+                <textarea name="content" id="content" placeholder="Content" @class([
                     'bg-gray-50 border text-gray-900 sm:text-sm rounded-lg block w-full p-2.5',
                     'border-gray-300 focus:ring-blue-500 focus:border-blue-500' => !$errors->has(
-                        'description',
+                        'content',
                     ),
                     'border-red-600 focus:ring-red-500 focus:border-red-500' => $errors->has(
-                        'description',
+                        'content',
                     ),
                 ]) required
-                    autocomplete>{{ old('description') }}</textarea>
+                    autocomplete>{{ old('content') }}</textarea>
 
-                @error('description')
+                @error('content')
                     <small class="text-red-600">{{ $message }}</small>
                 @enderror
             </div>
 
+            {{-- 上傳圖片 --}}
             <div class="flex justify-center mt-8">
                 <div class="max-w-2xl rounded-lg shadow-xl bg-gray-50">
                     <div class="m-4">
-                        <label class="inline-block mb-2 text-gray-500">File Upload</label>
+                        <label class="inline-block mb-2 text-gray-500">Upload Image</label>
                         <div class="flex items-center justify-center w-full">
                             <label
                                 class="flex flex-col w-full h-32 border-4 border-blue-200 border-dashed hover:bg-gray-100 hover:border-gray-300">
@@ -93,6 +97,22 @@
         </form>
     </div>
 
-
-
+    {{-- <form action="{{ route('store') }}" method="post" class="space-y-4">
+        @csrf
+        <div class="mb-3 pt-0 max-w-md mx-auto" style="width: 80%">
+            <input type="text" placeholder="Title" justify-center
+                class="px-3 py-4 placeholder-blueGray-300 text-blueGray-600 relative bg-white bg-white rounded text-base border-0 shadow outline-none focus:outline-none focus:ring w-full"
+                autofocus />
+            <br>
+            <br>
+            <input type="text" placeholder="Content"
+                class="px-3 py-20 placeholder-blueGray-300 text-blueGray-600 relative bg-white bg-white rounded text-base border-0 shadow outline-none focus:outline-none focus:ring w-full" />
+            <br>
+            <br>
+            <div class="flex justify-end">
+                <button type="submit"
+                    class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">{{ __('Create Post') }}</button>
+            </div>
+        </div>
+    </form> --}}
 @endsection

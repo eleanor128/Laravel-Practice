@@ -23,10 +23,10 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');
 
-Route::get('homepage', [ArticleController::class, 'showpage'])->name('showHomePage'); //這個route的名字叫showHomePage
+Route::get('homepage', [ArticleController::class, 'homepage'])->name('showHomePage'); //這個route的名字叫showHomePage
 Route::get('create', [ArticleController::class, 'create'])->name('create'); //這個route的名字叫create
 Route::post('store', [ArticleController::class, 'store'])->name('store'); //這個route的名字叫store
-
+Route::get('show/{id}', [ArticleController::class, 'show'])->name('show');
 Route::get('about_me', [AboutMeController::class, 'showpage'])->name('showAboutPage'); //這個route的名字叫showAboutPage
 
 

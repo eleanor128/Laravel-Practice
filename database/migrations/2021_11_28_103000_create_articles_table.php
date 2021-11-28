@@ -4,7 +4,6 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-
 class CreateArticlesTable extends Migration
 {
     /**
@@ -12,14 +11,19 @@ class CreateArticlesTable extends Migration
      *
      * @return void
      */
+
     public function up()
     {
         Schema::create('articles', function (Blueprint $table) {
+            /**  $table->foreignId('article_id')->constrained();*/
+
             $table->id();
+            /** $table->foreignId('author_id')->constrained(); */
             $table->string('title');
-            $table->text('paragraph');
-            $table->img('picture');
-            $table->timestamps();
+            $table->text('content');
+            /**
+            $table->img('image');
+             */
         });
     }
 
@@ -30,6 +34,6 @@ class CreateArticlesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('tasks');
+        Schema::dropIfExists('articles');
     }
 }
