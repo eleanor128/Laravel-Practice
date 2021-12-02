@@ -49,7 +49,18 @@ class ArticleController extends Controller
 
     public function show(Article $article)
     {
+        $article = Article::get();
+        return view('articles.show_article', compact('article'));
+    }
 
-        return view('articles.show_article');
+    public function edit(Article $article)
+    {
+        return view('articles.edit', compact('article'));
+    }
+
+    public function destroy(Article $article)
+    {
+        $article->delete();
+        return redirect()->route('showHomePage');
     }
 }
