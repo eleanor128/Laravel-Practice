@@ -2,9 +2,10 @@
 
 namespace App\Http\Requests;
 
+use Illuminate\Validation\Rule;
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreArticleRequest extends FormRequest
+class UpdateArticleRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,9 +25,8 @@ class StoreArticleRequest extends FormRequest
     public function rules()
     {
         return [
-            'title' => ['required', 'string'],
-            'content' => ['required', 'string', 'max:65535'],
-            // 'image' => ['image'],
+            'title' => ['required', 'string'], //Rule::unique('articles')->ignore($this->article->id), 
+            'content' => ['required', 'string'],
         ];
     }
 }

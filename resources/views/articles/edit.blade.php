@@ -10,7 +10,8 @@
 
 @section('content')
     <div class="w-full max-w-md mx-auto bg-white rounded-lg shadow-lg p-6">
-        <form action="{{ route('articles.update', ['article' => $article]) }}" method="post" class="space-y-4">
+        <form action="{{ route('update', ['article' => $article->id]) }}" method="post" class="space-y-4">
+
             @csrf
             @method("PUT")
 
@@ -42,7 +43,7 @@
                     'text-gray-900' => !$errors->has('content'),
                     'text-red-600' => $errors->has('content'),
                 ])>{{ __('Content') }}</label>
-                <textarea name="description" id="description" @class([
+                <textarea name="content" id="content" @class([
                     'bg-gray-50 border text-gray-900 sm:text-sm rounded-lg block w-full p-2.5',
                     'border-gray-300 focus:ring-blue-500 focus:border-blue-500' => !$errors->has(
                         'content',

@@ -21,7 +21,10 @@ class CreateArticlesTable extends Migration
             /** $table->foreignId('author_id')->constrained(); */
             $table->string('title');
             $table->text('content');
+            $table->timestamps();
+            $table->softDeletes();
             /**
+             
             $table->img('image');
              */
         });
