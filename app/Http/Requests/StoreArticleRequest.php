@@ -26,7 +26,8 @@ class StoreArticleRequest extends FormRequest
         return [
             'title' => ['required', 'string'],
             'content' => ['required', 'string', 'max:65535'],
-            // 'image' => ['image'],
+            'image' => ['image', 'image'],
+            /** ? 12/9 */
         ];
     }
 }
