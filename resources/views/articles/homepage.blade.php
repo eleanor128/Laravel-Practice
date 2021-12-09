@@ -28,9 +28,9 @@
                     </div>
                 </div>
 
-                <form>
+                <form action="{{ route('readmore', ['article' => $article]) }}">
                     {{-- @csrf --}}
-
+                    {{-- <a href=""> --}}
                     <button @class([
                         'self-start text-white focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-3 py-2 text-center inline-flex items-center',
                         'bg-blue-700 hover:bg-blue-800 focus:ring-blue-300' => !$article->trashed(),
@@ -38,7 +38,10 @@
                     ]) onclick="event.preventDefault();this.closest('form').submit();"
                         {{ $article->trashed() ? 'disabled' : '' }}>
                         {{ __('Read More') }}
+
+
                     </button>
+                    {{-- </a>12/9 --}}
                 </form>
                 {{-- <a href="#"
                     class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-3 py-2 text-center inline-flex items-center">

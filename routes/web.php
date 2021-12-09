@@ -45,6 +45,7 @@ Route::get('homepage', [ArticleController::class, 'homepage'])->name('showHomePa
 Route::get('create', [ArticleController::class, 'create'])->name('create'); //這個route的名字叫create
 Route::post('store', [ArticleController::class, 'store'])->name('store'); //這個route的名字叫store
 Route::get('show/{article}', [ArticleController::class, 'show'])->name('show');
+Route::get('readmore/{article}', [ArticleController::class, 'readmore'])->name('readmore');
 Route::get('edit/{article}', [ArticleController::class, 'edit'])->name('edit'); //?
 Route::put('update/{article}', [ArticleController::class, 'update'])->name('update');
 Route::delete('destroy/{article}', [ArticleController::class, 'destroy'])->name('destroy');

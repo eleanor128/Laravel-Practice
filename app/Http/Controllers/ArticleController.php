@@ -69,13 +69,20 @@ class ArticleController extends Controller
         return view('articles.show_article', compact('article'));
     }
 
+    public function readmore(Article $article)
+    {
+        return view('articles.readmore', compact('article'));
+    }
+
 
     public function indexWithDestroyed()
     {
         $articles = Article::withTrashed()
-            // ->with('title')
-            // ->with('content')
+            // ->get('title')
+            // ->get('content')
             ->get();
+
+        // dd($articles);
         return view('articles.homepage', compact('articles'));
     }
 
