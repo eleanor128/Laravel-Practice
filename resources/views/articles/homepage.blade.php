@@ -20,7 +20,7 @@
                     <h5 class="text-gray-900 font-bold text-2xl tracking-tight mb-2">{{ $article->title }}
                     </h5>
                 </a>
-                {{-- <small>{{ $timecreated }}</small> --}}
+                <small>{{ $article->updated_at }}</small>
                 <div class="flex-grow relative overflow-hidden mb-3">
                     <p class="flex-grow font-normal text-gray-700">{!! nl2br($article->content) !!}</p>
                     <div
