@@ -15,9 +15,9 @@
             <div class="flex justify-between space-x-2">
                 <div>
                     {{-- <h1 class="mb-2 text-5xl text-gray-700">{{ $article }}</h1> --}}
-                    <p class="text-gray-900 font-bold text-2xl tracking-tight mb-2">
+                    <h1 class="text-gray-900 font-bold text-2xl tracking-tight mb-2">
                         {{ $article->title }}
-                    </p>
+                    </h1>
                     {{-- <small>{{ $article->pivot->create_at }}</small> --}}
                     <p class="font-normal text-gray-700 mb-3">{{ $article->content }}</p>
 

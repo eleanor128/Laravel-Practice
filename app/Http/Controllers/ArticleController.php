@@ -31,6 +31,7 @@ class ArticleController extends Controller
     public function homepage()
     {
         $articles = Article::get();
+        // dd($articles);
         // $timecreated = Carbon::createFromTimeString($articles)->format('Y/m/d H:i'); // ? 12/4
         return view('articles.homepage', compact('articles'));
     }
@@ -40,7 +41,7 @@ class ArticleController extends Controller
         return view('articles.create');
     }
 
-    public function store(Request $request): RedirectResponse
+    public function store(UpdateArticleRequest $request): RedirectResponse
     {
         $validated = $request->validate([
             'title' => ['required', 'string'],
