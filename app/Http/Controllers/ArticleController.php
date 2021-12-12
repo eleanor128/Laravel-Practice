@@ -7,6 +7,7 @@ use Carbon\Carbon;
 use App\Http\Requests\StoreArticleRequest;
 use App\Http\Requests\UpdateArticleRequest;
 use App\Models\Article;
+use App\Providers\ArticleUpdated;
 use Dotenv\Loader\Loader;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -97,8 +98,13 @@ class ArticleController extends Controller
 
     public function update(UpdateArticleRequest $request, Article $article)
     {
+
         //compact('article'); //?
-        $article->update($request->validated());
+        $article->fill($request->validated());
+        if ($article->isDirty()) {
+            $article->save();
+            event(new ArticleUpdated($article)); //傳的參數是被update的course
+        }
 
         return redirect()->route('showHomePage', ['article' => $article]); //['article' => $article]
     }
