@@ -29,6 +29,7 @@ class SendArticleUpdatedNotification
      */
     public function handle(ArticleUpdated $event)
     {
-        Notification::send($event->article, new ArticleUpdatedNotification());
+        // dd($event->article->author());
+        Notification::send($event->article->author(), new ArticleUpdatedNotification($event->article));
     }
 }
