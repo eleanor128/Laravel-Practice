@@ -18,7 +18,7 @@ class CreateArticlesTable extends Migration
             /**  $table->foreignId('article_id')->constrained();*/
 
             $table->id();
-            /** $table->foreignId('author_id')->constrained(); */
+            $table->foreignId('author_id')->constrained('users');
             $table->string('title');
             $table->text('content');
             $table->string('image')->nullable();

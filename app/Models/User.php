@@ -67,6 +67,10 @@ class User extends Authenticatable implements MustVerifyEmail
         return $query->where('role', User::ROLE['reader']);
     }
 
+    public function articles(): HasMany
+    {
+        return $this->hasMany(Article::class, 'author_id');
+    }
 
     // public function courses(): HasMany
     // {

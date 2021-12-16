@@ -5,6 +5,8 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Carbon\Carbon;
 
 class Article extends Model
@@ -20,12 +22,17 @@ class Article extends Model
         //  年月日 時分秒 H:24小時制 h:12小時制
     }
 
-    public function category()
+    public function author(): BelongsTo
+    {
+        return $this->belongsTo(User::class, 'author_id');
+    }
+
+    public function category(): BelongsTo
     {
         return $this->belongsTo(Category::class);
     }
 
-    public function tag()
+    public function tag(): BelongsToMany
     {
         return $this->belongsToMany(Tag::class);
     }

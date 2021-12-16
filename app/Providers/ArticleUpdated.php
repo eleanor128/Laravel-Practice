@@ -15,7 +15,7 @@ class ArticleUpdated
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
-    public $course;
+    public $article;
     /**
      * Create a new event instance.
      *
