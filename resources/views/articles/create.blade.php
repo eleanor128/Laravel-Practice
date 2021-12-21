@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('title')
-    {{ __('Create Page') }}
+    {{ __('Create new Article') }}
 @endsection
 
 @section('header')
@@ -15,23 +15,19 @@
             @csrf
 
             <div>
-                <label for="title" @class([
-                    'text-sm font-medium block mb-2',
-                    'text-gray-900' => !$errors->has('title'),
-                    'text-red-600' => $errors->has('title'),
-                ])>
-                </label>
-                <input type="text" placeholder="Title" name="title" id="title" @class([
+                <x-form-label for="title"></x-form-label>
+                {{-- <input type="text" name="title" id="title" @class([
                     'bg-gray-50 border text-gray-900 sm:text-sm rounded-lg block w-full p-2.5',
                     'border-gray-300 focus:ring-blue-500 focus:border-blue-500' => !$errors->has(
                         'title',
                     ),
-                
                     'border-red-600 focus:ring-red-500 focus:border-red-500' => $errors->has(
                         'title',
                     ),
-                ])
-                    value="{{ old('title') }}" required autocomplete autofocus>
+                ]) value="{{ old('title') }}"
+                    required autocomplete autofocus> --}}
+                <x-form-input type="text" name="title" id="title" value="{{ old('title') }}" required autocomplete
+                    autofocus />
 
                 @error('title')
                     <small class="text-red-600">{{ $message }}</small>

@@ -30,7 +30,7 @@ Route::prefix('article')->name('article.')->group(function () {
     Route::get('w/destroyed', [ArticleController::class, 'indexWithDestroyed'])
         ->name('w/destroyed');
 
-    Route::get('{article}', [ArticleController::class, 'show'])
+    Route::get('w/destroyed/{article}', [ArticleController::class, 'show'])
         ->withTrashed()
         ->where('article', '\d+') // d:digit +:至少一個以上
         ->name('show');
