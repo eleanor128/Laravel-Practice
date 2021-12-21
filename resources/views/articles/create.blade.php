@@ -16,18 +16,8 @@
 
             <div>
                 <x-form-label for="title"></x-form-label>
-                {{-- <input type="text" name="title" id="title" @class([
-                    'bg-gray-50 border text-gray-900 sm:text-sm rounded-lg block w-full p-2.5',
-                    'border-gray-300 focus:ring-blue-500 focus:border-blue-500' => !$errors->has(
-                        'title',
-                    ),
-                    'border-red-600 focus:ring-red-500 focus:border-red-500' => $errors->has(
-                        'title',
-                    ),
-                ]) value="{{ old('title') }}"
-                    required autocomplete autofocus> --}}
-                <x-form-input type="text" name="title" id="title" value="{{ old('title') }}" required autocomplete
-                    autofocus />
+                <x-form-input type="text" name="title" id="title" placeholder="Title" value="{{ old('title') }}" required
+                    autocomplete autofocus />
 
                 @error('title')
                     <small class="text-red-600">{{ $message }}</small>
@@ -35,22 +25,10 @@
             </div>
 
             <div>
-                <label for="content" @class([
-                    'text-sm font-medium block mb-2',
-                    'text-gray-900' => !$errors->has('content'),
-                    'text-red-600' => $errors->has('content'),
-                ])>
-                </label>
-                <textarea name="content" id="content" placeholder="Content" @class([
-                    'bg-gray-50 border text-gray-900 sm:text-sm rounded-lg block w-full p-2.5',
-                    'border-gray-300 focus:ring-blue-500 focus:border-blue-500' => !$errors->has(
-                        'content',
-                    ),
-                    'border-red-600 focus:ring-red-500 focus:border-red-500' => $errors->has(
-                        'content',
-                    ),
-                ]) required
-                    autocomplete>{{ old('content') }}</textarea>
+                <x-form-label for="content"></x-form-label>
+
+                <x-form-textarea name="content" id="content" placeholder="Content" value="{{ old('content') }}">
+                </x-form-textarea>
 
                 @error('content')
                     <small class="text-red-600">{{ $message }}</small>
@@ -58,7 +36,7 @@
             </div>
 
             {{-- 上傳圖片 --}}
-            <div class="flex justify-center mt-8">
+            {{-- <div class="flex justify-center mt-8">
                 <div class="max-w-2xl rounded-lg shadow-xl bg-gray-50">
                     <div class="m-4">
                         <label class="inline-block mb-2 text-gray-500">Upload Image</label>
@@ -83,7 +61,7 @@
                         <button class="w-full px-4 py-2 text-white bg-blue-500 rounded shadow-xl">Upload</button>
                     </div>
                 </div>
-            </div>
+            </div> --}}
 
             <br>
             <div class="flex justify-end">

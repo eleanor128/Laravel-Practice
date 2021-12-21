@@ -49,6 +49,7 @@ class ArticleController extends Controller
             'content' => ['required', 'string'],
             /**'image' => ['image'],*/
         ]);
+        
         Article::create($validated);
         return redirect()->route('showHomePage');
     }
