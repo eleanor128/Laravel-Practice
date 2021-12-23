@@ -9,7 +9,9 @@ use App\Http\Requests\UpdateArticleRequest;
 use App\Models\Article;
 use App\Providers\ArticleUpdated;
 use Dotenv\Loader\Loader;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\Gate as FacadesGate;
 use Illuminate\Http\Request;
 
 class ArticleController extends Controller
@@ -39,17 +41,25 @@ class ArticleController extends Controller
 
     public function create()
     {
+        if (Gate::denies('create', Article::class)) {
+            return redirect()->route('showHomePage');
+        }
         return view('articles.create');
     }
 
     public function store(UpdateArticleRequest $request): RedirectResponse
     {
+
+        if (Gate::denies('create', Article::class)) {
+            return redirect()->route('showHomePage');
+        }
+
         $validated = $request->validate([
             'title' => ['required', 'string'],
             'content' => ['required', 'string'],
             /**'image' => ['image'],*/
         ]);
-        
+
         Article::create($validated);
         return redirect()->route('showHomePage');
     }
@@ -80,9 +90,11 @@ class ArticleController extends Controller
 
     public function indexWithDestroyed()
     {
+        if (Gate::denies('viewAnyWithDestroyed', Article::class)) {
+            return redirect()->route('showHomePage');
+        }
+
         $articles = Article::withTrashed()
-            // ->get('title')
-            // ->get('content')
             ->get();
 
         // dd($articles);

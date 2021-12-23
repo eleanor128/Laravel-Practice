@@ -6,6 +6,7 @@ use App\Models\Article;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
+use Spatie\Permission\Models\Role;
 
 class UserFactory extends Factory
 {
@@ -31,6 +32,8 @@ class UserFactory extends Factory
      *
      * @return \Illuminate\Database\Eloquent\Factories\Factory
      */
+
+    /** email 沒有認證的時候*/
     public function unverified()
     {
         return $this->state(function (array $attributes) {
@@ -40,15 +43,47 @@ class UserFactory extends Factory
         });
     }
 
+    public function author()
+    {
+        return $this->state(function (array $attributes) {
+            return [
+                'role' => User::ROLE['author']
+            ];
+        });
+    }
+
+    public function reader()
+    {
+        return $this->state(function (array $attributes) {
+            return [
+                'role' => User::ROLE['reader']
+            ];
+        });
+    }
+
+
     public function configure()
     {
-        return $this->afterCreating(function (User $user) {
-            if ($user->role === User::ROLE['author']) {
-                $user->articles()
-                    ->saveMany(
-                        Article::factory()->count(2)->make()
-                    );
+        $permissions = Role::with('permissions')
+            ->get()
+            ->keyBy('name')
+            ->map(function ($item, $key) {
+                return $item->permissions->pluck('name')->toArray(); //pluck():只留下name
+            })
+            ->toArray();
+
+        return $this->afterCreating(
+            function (User $user) use ($permissions) {
+                if ($user->role === User::ROLE['author']) {
+                    $user->articles()
+                        ->saveMany(
+                            Article::factory()->count(2)->make()
+                        );
+                    $user->syncPermissions($permissions['author']);
+                } else if ($user->role === User::ROLE['reader']) {
+                    $user->syncPermissions($permissions['reader']);
+                }
             }
-        });
+        );
     }
 }
