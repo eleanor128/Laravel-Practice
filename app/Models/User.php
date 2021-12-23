@@ -9,10 +9,11 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable implements MustVerifyEmail
 {
-    use HasApiTokens, HasFactory, Notifiable;
+    use HasApiTokens, HasFactory, Notifiable, HasRoles;
 
 
     const ROLE_ADMIN = 0;
@@ -72,15 +73,10 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->hasMany(Article::class, 'author_id');
     }
 
-    // public function courses(): HasMany
-    // {
-    //     return $this->hasMany(Course::class, 'lecturer_id');
-    //     /** 因為之前寫過course 叫做lecture_id*/
-    // }
 
-    // public function enrolled_courses(): BelongsToMany
+    // public function liked_courses(): BelongsToMany
     // {
-    //     return $this->belongsToMany(Course::class, 'enrollment')
+    //     return $this->belongsToMany(Article::class, 'enrollment')
     //         ->using(Enrollment::class)
     //         ->withTimestamps();
     // }

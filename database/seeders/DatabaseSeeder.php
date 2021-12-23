@@ -14,7 +14,8 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         $this->call([
-            // ArticleSeeder::class,
+            PermissionSeeder::class,
+            // ArticleSeeder::class, 不需要了，不然會跳author_id 沒有default value 的錯
             AdminSeeder::class,
             UserSeeder::class,
         ]);
