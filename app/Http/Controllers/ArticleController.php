@@ -7,6 +7,7 @@ use Carbon\Carbon;
 use App\Http\Requests\StoreArticleRequest;
 use App\Http\Requests\UpdateArticleRequest;
 use App\Models\Article;
+use App\Models\User;
 use App\Providers\ArticleUpdated;
 use Dotenv\Loader\Loader;
 use Illuminate\Support\Facades\Gate;
@@ -54,13 +55,25 @@ class ArticleController extends Controller
             return redirect()->route('showHomePage');
         }
 
-        $validated = $request->validate([
-            'title' => ['required', 'string'],
-            'content' => ['required', 'string'],
-            /**'image' => ['image'],*/
-        ]);
+        // $validated = $request->validate([
+        //     'title' => ['required', 'string'],
+        //     'content' => ['required', 'string'],
+        //     'image' => ['mimes:jpg, png, jpeg'],
+        // ]);
 
-        Article::create($validated);
+        $newImageName = $request->image . '.' . $request->image->extension(); //就不會有圖片名字重複的問題time() . '-' .  
+        // $request->image->move(public_path('images'), $newImageName);
+        // dd($test);
+
+        auth()->user()->articles()->create($request->validated()); //跳錯正常
+
+        // Article::create([
+        //     'title' => $request->input('title'),
+        //     'content' => $request->input('content'),
+        //     'author_id' => 0, //這行一直跳錯
+        //     'imagePath' => $newImageName,
+        // ]);
+        // dd($request->all());
         return redirect()->route('showHomePage');
     }
 
